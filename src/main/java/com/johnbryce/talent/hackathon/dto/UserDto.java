@@ -11,15 +11,11 @@ public class UserDto extends AbstractDto {
 
 	private static final long serialVersionUID = 5737757742597183799L;
 	
-	private int id;
+	private Long id;
 	private String firstName;
 	private String lastName;
+	private String nickName;
 	
-	public User mapToModel() {
-		User user = new User();
-		user.setId(id);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		return user;
-	}
+	@Override
+	public User mapToModel() { return map(User.class); }
 }
