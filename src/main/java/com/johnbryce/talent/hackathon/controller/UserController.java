@@ -16,7 +16,7 @@ import com.johnbryce.talent.hackathon.facade.UserFacade;
 import com.johnbryce.talent.hackathon.models.User;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class UserController {
 			throw new DataNotFoundException();
 		}
 	}
-	
+
 	@PostMapping
 	public UserDto createUser(@RequestBody UserDto userDtoToCreate) {
 		User user = UserFacade.createUser(userDtoToCreate.mapToModel());
