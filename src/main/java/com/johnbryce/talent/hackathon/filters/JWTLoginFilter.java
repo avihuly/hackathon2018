@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.johnbryce.talent.hackathon.dto.UserCredentials;
+import com.johnbryce.talent.hackathon.dto.UserCredentialsDto;
 import com.johnbryce.talent.hackathon.utils.JWTUtils;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
@@ -29,7 +29,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException, IOException, ServletException {
-		UserCredentials creds = new ObjectMapper().readValue(req.getInputStream(), UserCredentials.class);
+		UserCredentialsDto creds = new ObjectMapper().readValue(req.getInputStream(), UserCredentialsDto.class);
 		System.out.println(getAuthenticationManager());
 
 		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),

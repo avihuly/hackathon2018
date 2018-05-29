@@ -10,12 +10,11 @@ import com.johnbryce.talent.hackathon.dto.UserDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User extends AbstractModel {
 
 	private static final long serialVersionUID = -8988936449622467004L;
@@ -25,7 +24,9 @@ public class User extends AbstractModel {
 	private int id;
 	private String firstName;
 	private String lastName;
-	
+	private String salt;
+	private String hashedPassword;
+
 	@Override
 	public UserDto mapToDto() {
 		UserDto dto = new UserDto();
@@ -34,5 +35,5 @@ public class User extends AbstractModel {
 		dto.setLastName(lastName);
 		return dto;
 	}
-	
+
 }

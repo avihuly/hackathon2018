@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.johnbryce.talent.hackathon.dto.UserCredentials;
+import com.johnbryce.talent.hackathon.dto.UserCredentialsDto;
 
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
 	@PostMapping
-	public void login(@RequestBody UserCredentials userCredentials) {
+	public void login(@RequestBody UserCredentialsDto userCredentials) {
 		// Actual auth implementation is in JWTLoginFilter
 		// here for proper swagger representation
 

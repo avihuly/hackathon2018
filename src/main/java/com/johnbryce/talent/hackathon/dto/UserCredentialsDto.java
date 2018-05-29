@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class UserCredentials extends AbstractDto {
+public class UserCredentialsDto extends AbstractDto {
 
 	private static final long serialVersionUID = 5155137940808296859L;
 

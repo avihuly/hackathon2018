@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.johnbryce.talent.hackathon.dto.CreateUserInputDto;
 import com.johnbryce.talent.hackathon.dto.UserDto;
 import com.johnbryce.talent.hackathon.facade.UserFacade;
 import com.johnbryce.talent.hackathon.models.User;
@@ -39,7 +40,7 @@ public class UserController {
 	}
 
 	@PostMapping
-	public UserDto createUser(@RequestBody UserDto userDtoToCreate) {
+	public UserDto createUser(@RequestBody CreateUserInputDto userDtoToCreate) {
 		User user = UserFacade.createUser(userDtoToCreate.mapToModel());
 		return user.mapToDto();
 	}
