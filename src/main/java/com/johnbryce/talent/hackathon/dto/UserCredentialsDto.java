@@ -9,7 +9,7 @@ public class UserCredentialsDto extends AbstractDto {
 
 	private static final long serialVersionUID = 5155137940808296859L;
 
-	private String username;
+	private String email;
 	private String password;
 
 }

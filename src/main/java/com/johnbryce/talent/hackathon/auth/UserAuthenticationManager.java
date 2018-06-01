@@ -1,5 +1,6 @@
 package com.johnbryce.talent.hackathon.auth;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import com.johnbryce.talent.hackathon.facade.UserFacade;
+import com.johnbryce.talent.hackathon.utils.SecurityUtils;
 
 public class UserAuthenticationManager implements AuthenticationManager {
 
@@ -21,24 +23,54 @@ public class UserAuthenticationManager implements AuthenticationManager {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		String userName = (String) authentication.getPrincipal();
+		String userEmail = (String) authentication.getPrincipal();
 		String userPassword = (String) authentication.getCredentials();
 
-		// Need to check the userName and and password against the db
+		boolean authenticated = false;
 
-		// Spring authorities
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		// SimpleGrantedAuthority adminAuthority = new
-		// SimpleGrantedAuthority("ROLE_ADMIN");
-		// authorities.add(adminAuthority);
+		// Need to check the email and and password against the db
+		// ineffective as hell for now
+		List<com.johnbryce.talent.hackathon.models.User> allUsers = UserFacade.getAllUsers();
+		for (com.johnbryce.talent.hackathon.models.User user : allUsers) {
 
-		User user = new User(userName, userPassword, authorities);
-		// extended User constructor
-		// User user = new User(userName, userPassword, true, true, true, true,
-		// authorities);
+			if (user.getEmail().equals(userEmail)) {
 
-		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(user, user.getAuthorities());
-		return newAuthentication;
+				try {
+					byte[] salt = user.getSalt();
+					byte[] userInputPasswordByte = SecurityUtils.getHashedByteArray(userPassword, salt);
+					byte[] savedPasswordByte = user.getPassword();
+
+					if (java.util.Arrays.equals(savedPasswordByte, userInputPasswordByte)) {
+						// user is authenticated!!!
+						authenticated = true;
+					} else {
+						// no need to loop any further
+						break;
+					}
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		if (authenticated) {
+			// Spring authorities
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			// SimpleGrantedAuthority adminAuthority = new
+			// SimpleGrantedAuthority("ROLE_ADMIN");
+			// authorities.add(adminAuthority);
+
+			// extended User constructor
+			// User user = new User(userName, userPassword, true, true, true, true,
+			// authorities);
+			User user = new User(userEmail, userPassword, authorities);
+			return new UsernamePasswordAuthenticationToken(user, user.getAuthorities());
+		} else {
+			// throw exception of bad login attempt
+			return null;
+		}
+
 	}
 
 }

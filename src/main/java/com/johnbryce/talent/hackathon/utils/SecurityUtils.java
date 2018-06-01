@@ -17,18 +17,19 @@ public class SecurityUtils {
 		return bytes;
 	}
 
-	public static String bytetoString(byte[] input) {
-		return Base64.encodeBase64String(input);
-	}
+	// public static String byteToString(byte[] input) {
+	// return Base64.encodeBase64String(input);
+	// }
 
-	public static byte[] getHashWithSalt(String input, byte[] salt) throws NoSuchAlgorithmException {
+	public static byte[] getHashedByteArray(String stringToHash, byte[] salt) throws NoSuchAlgorithmException {
 		MessageDigest digest = MessageDigest.getInstance(HASHING_TECHNIQUE);
 		digest.reset();
 		digest.update(salt);
-		byte[] hashedBytes = digest.digest(stringToByte(input));
+		byte[] hashedBytes = digest.digest(stringToByte(stringToHash));
 		return hashedBytes;
 	}
 
+	// is needed?
 	public static byte[] stringToByte(String input) {
 		if (Base64.isBase64(input)) {
 			return Base64.decodeBase64(input);

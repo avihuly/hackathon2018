@@ -22,15 +22,19 @@ public class User extends AbstractModel {
 	@Id
 	@GeneratedValue
 	private int id;
+	private String email;
 	private String firstName;
 	private String lastName;
-	private String salt;
-	private String hashedPassword;
+	// @Lob
+	private byte[] salt;
+	// @Lob
+	private byte[] password;
 
 	@Override
 	public UserDto mapToDto() {
 		UserDto dto = new UserDto();
 		dto.setId(id);
+		dto.setEmail(email);
 		dto.setFirstName(firstName);
 		dto.setLastName(lastName);
 		return dto;

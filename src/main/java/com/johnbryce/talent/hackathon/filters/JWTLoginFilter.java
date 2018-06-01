@@ -30,9 +30,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException, IOException, ServletException {
 		UserCredentialsDto creds = new ObjectMapper().readValue(req.getInputStream(), UserCredentialsDto.class);
-		System.out.println(getAuthenticationManager());
 
-		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
+		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(),
 				creds.getPassword(), Collections.emptyList()));
 	}
 
