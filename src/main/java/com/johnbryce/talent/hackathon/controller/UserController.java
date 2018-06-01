@@ -36,9 +36,10 @@ public class UserController {
 		}
 	}
 
-	// Moved to registration controller - in order to control authorization with ant
-	// matchers in a simpler way
-
+	/**
+	 * Moved to registration controller - in order to control authorization with ant
+	 * matchers in a simpler way
+	 */
 	// @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	// public UserDto createUser(@RequestBody CreateUserInputDto userDtoToCreate) {
 	// User user = UserFacade.createUser(userDtoToCreate.mapToModel(),
