@@ -16,5 +16,7 @@ public interface ChallengeFacade {
 	public Challenge updateChallenge(Challenge challenge);
 	
 	public Challenge deleteChallenge(Long id);
+
+	public List<Challenge> getChallenges();
 	
 }

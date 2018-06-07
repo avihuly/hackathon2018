@@ -12,13 +12,19 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import com.johnbryce.talent.hackathon.facade.CurrentUserFacade;
 import com.johnbryce.talent.hackathon.facade.UserFacade;
+import com.johnbryce.talent.hackathon.repository.UserRepository;
 import com.johnbryce.talent.hackathon.utils.SecurityUtils;
 
 public class UserAuthenticationManager implements AuthenticationManager {
 
 	@Autowired
 	UserFacade UserFacade;
+	@Autowired
+	CurrentUserFacade currentUserFacade;
+	@Autowired
+	UserRepository userRepo;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -42,6 +48,7 @@ public class UserAuthenticationManager implements AuthenticationManager {
 
 					if (java.util.Arrays.equals(savedPasswordByte, userInputPasswordByte)) {
 						// user is authenticated!!!
+						currentUserFacade.setUser().accept(userRepo.getOneByEmail(userEmail));
 						authenticated = true;
 					} else {
 						// no need to loop any further

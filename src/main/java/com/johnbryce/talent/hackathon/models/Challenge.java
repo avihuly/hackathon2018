@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,13 +27,14 @@ public class Challenge extends AbstractModel {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@NotNull
+//	@NotNull
 	private String title;
 	
 	private String description;
-	@NotNull
+//	@NotNull
 	private String value;
-	@NotNull
+//	@NotNull
+	@OneToOne
 	private User createdBy;
 	@CreationTimestamp
 	private LocalDateTime creationDate;
@@ -40,14 +42,14 @@ public class Challenge extends AbstractModel {
 	private LocalDateTime updateDate;
 	
 	private LocalDateTime dueDate;
-	@NotNull
+//	@NotNull
 	private ChallengeStatus status;
 	@OneToMany
 	private List<User> submissions;
 	@OneToMany
 	private List<Comment> commets;
-	@NotNull
-	private Deficulty deficulty;	
+//	@NotNull
+	private Difficulty difficulty;	
 	
 	
 	@Override
@@ -55,9 +57,12 @@ public class Challenge extends AbstractModel {
 		ChallengeDto map = map(ChallengeDto.class);
 		map.setStatus(status.mapToDto());
 		map.setCreatedBy(createdBy.mapToDto());
-		map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
-		map.setCommets(commets.stream().map(Comment::mapToDto).collect(Collectors.toList()));
-		map.setDeficulty(deficulty.mapToDto());
+		if(submissions!=null)
+			map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
+		if(commets!=null)
+			map.setCommets(commets.stream().map(Comment::mapToDto).collect(Collectors.toList()));
+		if(difficulty!=null)
+			map.setDifficulty(difficulty.mapToDto());
 		return map;
 	}
 

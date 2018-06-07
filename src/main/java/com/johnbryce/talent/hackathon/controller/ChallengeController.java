@@ -18,8 +18,8 @@ import com.johnbryce.talent.hackathon.facade.ChallengeFacade;
 import com.johnbryce.talent.hackathon.models.Challenge;
 
 @RestController
-@RequestMapping("/challenge")
-public class challengeController {
+@RequestMapping("/challenges")
+public class ChallengeController {
 
 	@Autowired
 	private ChallengeFacade challengeFacade;
