@@ -3,7 +3,7 @@ package com.johnbryce.talent.hackathon.models;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +27,7 @@ public class User extends AbstractModel {
 	@Id
 	@GeneratedValue
 	private int id;
+	@Column(unique = true)
 	private String email;
 	private String firstName;
 	private String lastName;
