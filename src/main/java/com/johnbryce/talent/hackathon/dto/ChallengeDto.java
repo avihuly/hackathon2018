@@ -35,7 +35,7 @@ public class ChallengeDto extends AbstractDto {
 
 	private List<UserDto> submissions;
 
-	private List<CommentDto> commets;
+	private List<CommentDto> comments;
 
 	private Difficulty difficulty;
 
@@ -48,8 +48,8 @@ public class ChallengeDto extends AbstractDto {
 			map.setCreatedBy(createdBy.mapToModel());
 		if (submissions != null)
 			map.setSubmissions(submissions.stream().map(UserDto::mapToModel).collect(Collectors.toList()));
-		if (commets != null)
-			map.setComments(commets.stream().map(CommentDto::mapToModel).collect(Collectors.toList()));
+		if (comments != null)
+			map.setComments(comments.stream().map(CommentDto::mapToModel).collect(Collectors.toList()));
 		map.setDifficulty(difficulty);
 		return map;
 	}

@@ -26,48 +26,47 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Challenge extends AbstractModel {
 	private static final long serialVersionUID = 7960490004473456928L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-//	@NotNull
+	// @NotNull
 	private String title;
-	
+
 	private String description;
-//	@NotNull
+	// @NotNull
 	private String value;
-//	@NotNull
-//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "id
+	// @NotNull
+	// @OneToOne(fetch = FetchType.EAGER, mappedBy = "id
 	@OneToOne(fetch = FetchType.EAGER)
 	private User createdBy;
 	@CreationTimestamp
 	private LocalDateTime creationDate;
 	@UpdateTimestamp
 	private LocalDateTime updateDate;
-	
+
 	private LocalDateTime dueDate;
-//	@NotNull
+	// @NotNull
 	private ChallengeStatus status;
 	@OneToMany
 	private List<User> submissions;
 	@OneToMany
 	private List<Comment> comments;
-//	@NotNull
+	// @NotNull
 	@Enumerated(EnumType.STRING)
-	private Difficulty difficulty;	
-	
-	
+	private Difficulty difficulty;
+
 	@Override
 	public ChallengeDto mapToDto() {
 		ChallengeDto map = map(ChallengeDto.class);
-		if(status != null) 
+		if (status != null)
 			map.setStatus(status.mapToDto());
-		if(createdBy!=null)
+		if (createdBy != null)
 			map.setCreatedBy(createdBy.mapToDto());
-		if(submissions!=null)
+		if (submissions != null)
 			map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
-		if(comments!=null)
-			map.setCommets(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
+		if (comments != null)
+			map.setComments(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
 		map.setDifficulty(difficulty);
 		return map;
 	}
