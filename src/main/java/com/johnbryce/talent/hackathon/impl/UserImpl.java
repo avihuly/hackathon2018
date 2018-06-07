@@ -26,13 +26,14 @@ public class UserImpl implements UserFacade {
 	}
 
 	@Override
-	public User createUser(User user, String noneHashedPassword) {
+	public User createUser(User user, String noneHashedPassword, int userType) {
 		try {
 			// generate salt and hashedPasswrd(with the salt)
 			byte[] salt = SecurityUtils.generateSalt();
 			byte[] hashedPassword = SecurityUtils.getHashedByteArray(noneHashedPassword, salt);
 			user.setSalt(salt);
 			user.setPassword(hashedPassword);
+			user.setUserType(userType);
 
 			return userRepository.save(user);
 
