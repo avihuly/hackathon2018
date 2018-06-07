@@ -1,5 +1,6 @@
 package com.johnbryce.talent.hackathon.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.johnbryce.talent.hackathon.facade.UserFacade;
 import com.johnbryce.talent.hackathon.models.User;
 import com.johnbryce.talent.hackathon.repository.UserRepository;
+import com.johnbryce.talent.hackathon.utils.SecurityUtils;
 
-public class UserImpl implements UserFacade{
-	
+public class UserImpl implements UserFacade {
+
 	@Autowired
 	UserRepository userRepository;
 
@@ -24,7 +26,22 @@ public class UserImpl implements UserFacade{
 	}
 
 	@Override
-	public User createUser(User user) {
-		return userRepository.save(user);
+	public User createUser(User user, String noneHashedPassword, int userType) {
+		try {
+			// generate salt and hashedPasswrd(with the salt)
+			byte[] salt = SecurityUtils.generateSalt();
+			byte[] hashedPassword = SecurityUtils.getHashedByteArray(noneHashedPassword, salt);
+			user.setSalt(salt);
+			user.setPassword(hashedPassword);
+			user.setUserType(userType);
+
+			return userRepository.save(user);
+
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// should throw exception
+			return null;
+		}
 	}
 }

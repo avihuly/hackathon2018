@@ -10,6 +10,6 @@ public interface UserFacade {
 
 	public User getUser(int id);
 
-	public User createUser(User user);
+	public User createUser(User user, String noneHashedPassword, int userType);
 
 }
