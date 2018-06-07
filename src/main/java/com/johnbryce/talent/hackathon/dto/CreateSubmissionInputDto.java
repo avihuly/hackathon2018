@@ -20,7 +20,8 @@ public class CreateSubmissionInputDto extends AbstractDto {
 	public Submission mapToModel() {
 		Submission map = map(Submission.class);
 		User user = new User();
-		// user.setId(submitter);
+
+		user.setId(submitter);
 		map.setSubmitter(user);
 		return map;
 	}
