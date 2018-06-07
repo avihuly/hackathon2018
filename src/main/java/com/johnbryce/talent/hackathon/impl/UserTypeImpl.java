@@ -19,7 +19,7 @@ public class UserTypeImpl implements UserTypeFacade {
 	}
 
 	@Override
-	public UserType getUserType(int id) {
+	public UserType getUserType(long id) {
 		return userTypeRepository.findById(id).orElse(null);
 	}
 }

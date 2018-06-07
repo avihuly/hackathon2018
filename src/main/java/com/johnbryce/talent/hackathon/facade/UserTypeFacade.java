@@ -8,6 +8,6 @@ public interface UserTypeFacade {
 
 	public List<UserType> getAllUserTypes();
 
-	public UserType getUserType(int id);
+	public UserType getUserType(long id);
 
 }
