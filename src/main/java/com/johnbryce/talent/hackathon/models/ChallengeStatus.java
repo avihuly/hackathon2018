@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class ChallengeStatus extends AbstractModel {
 	
 	@Id
-	private Long id;
+	private int id;
 	private String value;
 	private String description;
 	

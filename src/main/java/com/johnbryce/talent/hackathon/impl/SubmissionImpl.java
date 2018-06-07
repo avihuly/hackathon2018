@@ -21,7 +21,7 @@ public class SubmissionImpl implements SubmissionFacade {
 	private UserFacade userFacade;
 
 	@Override
-	public Submission getSubmission(Long id) {
+	public Submission getSubmission(int id) {
 		return submissionRepo.getOne(id);
 	}
 

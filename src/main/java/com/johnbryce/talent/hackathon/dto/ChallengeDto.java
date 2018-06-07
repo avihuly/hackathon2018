@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 public class ChallengeDto extends AbstractDto {
 	private static final long serialVersionUID = -6011265172044993542L;
 
-	private Long id;
+	private int id;
 
 	private String title;
 

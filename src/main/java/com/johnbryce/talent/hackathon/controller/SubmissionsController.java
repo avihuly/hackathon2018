@@ -22,7 +22,7 @@ public class SubmissionsController {
 	private SubmissionFacade submissionFacade;
 
 	@GetMapping("/{id}")
-	public SubmissionDto getSubmission(@PathVariable Long id) {
+	public SubmissionDto getSubmission(@PathVariable Integer id) {
 		return submissionFacade.getSubmission(id).mapToDto();
 	}
 

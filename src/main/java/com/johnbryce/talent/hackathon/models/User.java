@@ -26,7 +26,7 @@ public class User extends AbstractModel {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	@Column(unique = true)
 	private String email;
 	private String firstName;

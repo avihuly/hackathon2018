@@ -25,7 +25,7 @@ public class ChallengeImpl implements ChallengeFacade {
 	private ChallengeRepository challengeRepo;
 	
 	@Override
-	public Challenge getChallenge(Long id) {
+	public Challenge getChallenge(int id) {
 		return challengeRepo.getOne(id);
 	}
 
@@ -62,7 +62,7 @@ public class ChallengeImpl implements ChallengeFacade {
 
 	@Override
 	@Transactional
-	public Challenge deleteChallenge(Long id) {
+	public Challenge deleteChallenge(int id) {
 		Challenge current = challengeRepo.getOne(id);
 		if(! ChallengeStatus.flowCheck.test(current.getStatus(), ChallengeStatus.DELETED.get())) {
 			throw new StatusFlowException();

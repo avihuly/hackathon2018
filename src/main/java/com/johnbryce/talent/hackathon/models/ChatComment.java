@@ -28,7 +28,7 @@ public class ChatComment extends AbstractModel {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	
 	@OneToOne
 	private User author;

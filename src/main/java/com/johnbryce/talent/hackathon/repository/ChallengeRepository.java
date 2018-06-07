@@ -9,7 +9,7 @@ import com.johnbryce.talent.hackathon.models.Challenge;
 import com.johnbryce.talent.hackathon.models.User;
 
 @Repository
-public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
+public interface ChallengeRepository extends JpaRepository<Challenge, Integer> {
 	public List<Challenge> findAllChallengeBycreatedBy(User user);
 	
 }

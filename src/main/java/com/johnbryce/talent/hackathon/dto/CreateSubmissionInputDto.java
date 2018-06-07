@@ -13,7 +13,7 @@ public class CreateSubmissionInputDto extends AbstractDto {
 	private static final long serialVersionUID = -6697836368396671099L;
 
 	private String description;
-	private Long submitter;
+	private int submitter;
 	private String submission;
 
 	@Override

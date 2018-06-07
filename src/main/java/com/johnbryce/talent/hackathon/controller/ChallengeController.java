@@ -26,7 +26,7 @@ public class ChallengeController {
 	private ChallengeFacade challengeFacade;
 	
 	@GetMapping("/{id}")
-	public ChallengeDto getChallenge(@PathVariable Long id) {
+	public ChallengeDto getChallenge(@PathVariable Integer id) {
 		return challengeFacade.getChallenge(id).mapToDto();
 	}
 	
@@ -42,13 +42,13 @@ public class ChallengeController {
 	}
 	
 	@PutMapping("/{id}")
-	public ChallengeDto updateChallenge(@PathVariable Long id, @RequestBody ChallengeDto challenge) {
+	public ChallengeDto updateChallenge(@PathVariable Integer id, @RequestBody ChallengeDto challenge) {
 		challenge.setId(id);
 		return challengeFacade.updateChallenge(challenge.mapToModel()).mapToDto();
 	}
 	
 	@DeleteMapping("/{id}")
-	public ChallengeDto deleteChallenge(@PathVariable Long id) {
+	public ChallengeDto deleteChallenge(@PathVariable Integer id) {
 		return challengeFacade.deleteChallenge(id).mapToDto();
 	}
 	
