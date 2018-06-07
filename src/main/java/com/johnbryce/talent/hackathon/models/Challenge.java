@@ -51,7 +51,7 @@ public class Challenge extends AbstractModel {
 	@OneToMany
 	private List<User> submissions;
 	@OneToMany
-	private List<Comment> commets;
+	private List<Comment> comments;
 //	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Difficulty difficulty;	
@@ -66,8 +66,8 @@ public class Challenge extends AbstractModel {
 			map.setCreatedBy(createdBy.mapToDto());
 		if(submissions!=null)
 			map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
-		if(commets!=null)
-			map.setCommets(commets.stream().map(Comment::mapToDto).collect(Collectors.toList()));
+		if(comments!=null)
+			map.setCommets(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
 		map.setDifficulty(difficulty);
 		return map;
 	}
