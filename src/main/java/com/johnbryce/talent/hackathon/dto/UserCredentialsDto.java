@@ -1,5 +1,7 @@
 package com.johnbryce.talent.hackathon.dto;
 
+import com.johnbryce.talent.hackathon.models.AbstractModel;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,5 +13,12 @@ public class UserCredentialsDto extends AbstractDto {
 
 	private String email;
 	private String password;
+	
+	
+	@Override
+	@Deprecated
+	public AbstractModel mapToModel() {
+		return null;
+	}
 
 }
