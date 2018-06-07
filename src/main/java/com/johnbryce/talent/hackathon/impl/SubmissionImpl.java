@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.johnbryce.talent.hackathon.facade.SubmissionFacade;
 import com.johnbryce.talent.hackathon.facade.UserFacade;
 import com.johnbryce.talent.hackathon.models.Submission;
+import com.johnbryce.talent.hackathon.models.User;
 import com.johnbryce.talent.hackathon.repository.SubmissionRepository;
 
 @Service
@@ -32,7 +33,8 @@ public class SubmissionImpl implements SubmissionFacade {
 	@Override
 	public Submission createSubmission(Submission submission) {
 		// get the owner of the submission
-		userFacade.getUser(submission.getSubmitter().getId());
+		User user = userFacade.getUser(submission.getSubmitter().getId());
+		submission.setSubmitter(user);
 
 		submissionRepo.save(submission);
 		return null;

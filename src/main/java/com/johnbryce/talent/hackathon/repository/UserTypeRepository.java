@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.johnbryce.talent.hackathon.models.UserType;
 
-public interface UserTypeRepository extends JpaRepository<UserType, Integer> {
+public interface UserTypeRepository extends JpaRepository<UserType, Long> {
 
 }

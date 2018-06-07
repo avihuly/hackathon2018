@@ -26,14 +26,14 @@ public class User extends AbstractModel {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	@Column(unique = true)
 	private String email;
 	private String firstName;
 	private String lastName;
 	private byte[] salt;
 	private byte[] password;
-	private int userType;
+	private Long userType;
 
 	@ManyToMany
 	// @ElementCollection
