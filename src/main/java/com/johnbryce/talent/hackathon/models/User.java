@@ -2,39 +2,42 @@ package com.johnbryce.talent.hackathon.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.johnbryce.talent.hackathon.dto.UserDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Data
 @EqualsAndHashCode(callSuper = false)
+
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User extends AbstractModel {
 
 	private static final long serialVersionUID = -8988936449622467004L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@NotNull
+	@GeneratedValue
+	private int id;
+	private String email;
 	private String firstName;
-	@NotNull
 	private String lastName;
-	
-	private String nickName;
-	
+	// @Lob
+	private byte[] salt;
+	// @Lob
+	private byte[] password;
+
 	@Override
 	public UserDto mapToDto() {
-		return map(UserDto.class);
+		UserDto dto = new UserDto();
+		dto.setId(id);
+		dto.setEmail(email);
+		dto.setFirstName(firstName);
+		dto.setLastName(lastName);
+		return dto;
 	}
-	
+
 }
