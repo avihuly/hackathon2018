@@ -1,7 +1,6 @@
 package com.johnbryce.talent.hackathon.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +13,6 @@ import com.johnbryce.talent.hackathon.facade.ChallengeFacade;
 import com.johnbryce.talent.hackathon.facade.CurrentUserFacade;
 import com.johnbryce.talent.hackathon.models.Challenge;
 import com.johnbryce.talent.hackathon.models.ChallengeStatus;
-import com.johnbryce.talent.hackathon.models.User;
 import com.johnbryce.talent.hackathon.repository.ChallengeRepository;
 
 
@@ -33,16 +31,12 @@ public class ChallengeImpl implements ChallengeFacade {
 
 	@Override
 	public List<Challenge> getChallenges(ChallengeFilters filters) {
-		//TODO:
-		User user = userFacade.getUser();
-		return challengeRepo.findAllChallengeBycreatedBy(user);
+		return challengeRepo.findAllChallengeBycreatedBy(userFacade.getUser());
 	}
 
 	@Override
 	public List<Challenge> getChallenges() {
-		//TODO:
-		User user = userFacade.getUser();
-		return challengeRepo.findAll();
+		return challengeRepo.findAllChallengeBycreatedBy(userFacade.getUser());
 	}
 	
 	@Override
