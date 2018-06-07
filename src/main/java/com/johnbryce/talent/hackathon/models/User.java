@@ -34,15 +34,17 @@ public class User extends AbstractModel {
 	private byte[] salt;
 	private byte[] password;
 	private int userType;
-	
+
 	@ManyToMany
 	// @ElementCollection
 	private List<Chat> chats;
-	
+
 	@Override
 	public UserDto mapToDto() {
 		UserDto map = map(UserDto.class);
-		map.setChats(chats.stream().map(Chat::mapToDto).collect(Collectors.toList()));
+		if (chats != null) {
+			map.setChats(chats.stream().map(Chat::mapToDto).collect(Collectors.toList()));
+		}
 		return map;
 	}
 
