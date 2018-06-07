@@ -4,18 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import com.johnbryce.talent.hackathon.models.AbstractModel;
 import com.johnbryce.talent.hackathon.models.Challenge;
-import com.johnbryce.talent.hackathon.models.ChallengeStatus;
-import com.johnbryce.talent.hackathon.models.Comment;
-import com.johnbryce.talent.hackathon.models.Deficulty;
-import com.johnbryce.talent.hackathon.models.User;
+import com.johnbryce.talent.hackathon.models.Difficulty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class ChallengeDto extends AbstractDto {
+	private static final long serialVersionUID = -6011265172044993542L;
 
 	private Long id;
 	
@@ -46,17 +37,21 @@ public class ChallengeDto extends AbstractDto {
 	
 	private List<CommentDto> commets;
 	
-	private DeficultyDto deficulty;
+	private Difficulty difficulty;
 	
 	
 	@Override
 	public Challenge mapToModel() {
 		Challenge map = map(Challenge.class);
-		map.setStatus(status.mapToModel());
-		map.setCreatedBy(createdBy.mapToModel());
-		map.setSubmissions(submissions.stream().map(UserDto::mapToModel).collect(Collectors.toList()));
-		map.setCommets(commets.stream().map(CommentDto::mapToModel).collect(Collectors.toList()));
-		map.setDeficulty(deficulty.mapToModel());
+		if(status!=null)
+			map.setStatus(status.mapToModel());
+		if(createdBy !=null)
+			map.setCreatedBy(createdBy.mapToModel());
+		if(submissions!= null)
+			map.setSubmissions(submissions.stream().map(UserDto::mapToModel).collect(Collectors.toList()));
+		if(commets!= null)
+			map.setCommets(commets.stream().map(CommentDto::mapToModel).collect(Collectors.toList()));
+		map.setDifficulty(difficulty);
 		return map;
 	}
 

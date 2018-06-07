@@ -1,5 +1,8 @@
 package com.johnbryce.talent.hackathon.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.constraints.NotNull;
 
 import com.johnbryce.talent.hackathon.models.User;
@@ -21,13 +24,11 @@ public class UserDto extends AbstractDto {
 	@NotNull
 	private String lastName;
 
+	private List<ChatDto> chats;
+	
 	public User mapToModel() {
-//		User user = new User();
-//		user.setId(id);
-//		user.setEmail(email);
-//		user.setFirstName(firstName);
-//		user.setLastName(lastName);
-//		return user;
+		User map = map(User.class);
+		map.setChats(chats.stream().map(ChatDto::mapToModel).collect(Collectors.toList()));
 		return map(User.class);
 	}
 }
