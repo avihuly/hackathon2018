@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.johnbryce.talent.hackathon.models.Challenge;
+import com.johnbryce.talent.hackathon.models.Difficulty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class ChallengeDto extends AbstractDto {
+	private static final long serialVersionUID = -6011265172044993542L;
 
 	private Long id;
 	
@@ -35,7 +37,7 @@ public class ChallengeDto extends AbstractDto {
 	
 	private List<CommentDto> commets;
 	
-	private DifficultyDto difficulty;
+	private Difficulty difficulty;
 	
 	
 	@Override
@@ -49,8 +51,7 @@ public class ChallengeDto extends AbstractDto {
 			map.setSubmissions(submissions.stream().map(UserDto::mapToModel).collect(Collectors.toList()));
 		if(commets!= null)
 			map.setCommets(commets.stream().map(CommentDto::mapToModel).collect(Collectors.toList()));
-		if(difficulty!=null)
-			map.setDifficulty(difficulty.mapToModel());
+		map.setDifficulty(difficulty);
 		return map;
 	}
 

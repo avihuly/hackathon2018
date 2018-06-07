@@ -1,12 +1,14 @@
 package com.johnbryce.talent.hackathon.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.johnbryce.talent.hackathon.controller.DataNotFoundException;
 import com.johnbryce.talent.hackathon.exception.StatusFlowException;
 import com.johnbryce.talent.hackathon.facade.ChallengeFacade;
 import com.johnbryce.talent.hackathon.facade.CurrentUserFacade;
@@ -55,12 +57,13 @@ public class ChallengeImpl implements ChallengeFacade {
 	@Override
 	@Transactional
 	public Challenge updateChallenge(Challenge challenge) {
-		Challenge current = challengeRepo.getOne(challenge.getId());
+		Challenge current = challengeRepo.findById(challenge.getId()).orElseThrow(() -> new DataNotFoundException());
 		
 		if(! ChallengeStatus.flowCheck.test(current.getStatus(), challenge.getStatus())) {
 			throw new StatusFlowException();
 		}
-		return challenge;
+		current = challengeRepo.save(current);
+		return current;
 	}
 
 	@Override

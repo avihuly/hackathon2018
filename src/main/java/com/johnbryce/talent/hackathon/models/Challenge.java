@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,7 +25,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Challenge extends AbstractModel {
-
+	private static final long serialVersionUID = 7960490004473456928L;
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -34,7 +37,8 @@ public class Challenge extends AbstractModel {
 //	@NotNull
 	private String value;
 //	@NotNull
-	@OneToOne
+//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "id
+	@OneToOne(fetch = FetchType.EAGER)
 	private User createdBy;
 	@CreationTimestamp
 	private LocalDateTime creationDate;
@@ -49,20 +53,22 @@ public class Challenge extends AbstractModel {
 	@OneToMany
 	private List<Comment> commets;
 //	@NotNull
+	@Enumerated(EnumType.STRING)
 	private Difficulty difficulty;	
 	
 	
 	@Override
 	public ChallengeDto mapToDto() {
 		ChallengeDto map = map(ChallengeDto.class);
-		map.setStatus(status.mapToDto());
-		map.setCreatedBy(createdBy.mapToDto());
+		if(status != null) 
+			map.setStatus(status.mapToDto());
+		if(createdBy!=null)
+			map.setCreatedBy(createdBy.mapToDto());
 		if(submissions!=null)
 			map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
 		if(commets!=null)
 			map.setCommets(commets.stream().map(Comment::mapToDto).collect(Collectors.toList()));
-		if(difficulty!=null)
-			map.setDifficulty(difficulty.mapToDto());
+		map.setDifficulty(difficulty);
 		return map;
 	}
 

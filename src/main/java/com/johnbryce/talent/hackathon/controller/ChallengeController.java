@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,12 +37,12 @@ public class ChallengeController {
 	}
 	
 	@PostMapping
-	public ChallengeDto createChallenge(ChallengeDto challenge) {
+	public ChallengeDto createChallenge(@RequestBody ChallengeDto challenge) {
 		return challengeFacade.createChallnge(challenge.mapToModel()).mapToDto();
 	}
 	
 	@PutMapping("/{id}")
-	public ChallengeDto updateChallenge(@PathVariable Long id, ChallengeDto challenge) {
+	public ChallengeDto updateChallenge(@PathVariable Long id, @RequestBody ChallengeDto challenge) {
 		challenge.setId(id);
 		return challengeFacade.updateChallenge(challenge.mapToModel()).mapToDto();
 	}

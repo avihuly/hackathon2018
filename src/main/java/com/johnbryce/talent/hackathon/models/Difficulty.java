@@ -1,26 +1,16 @@
 package com.johnbryce.talent.hackathon.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import com.johnbryce.talent.hackathon.dto.DifficultyDto;
+@AllArgsConstructor
+public enum Difficulty {
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Entity
-public class Difficulty extends AbstractModel {
-
-	@Id
-	private Long id;
-	private String value;
-	private String description;
+	EASY("easy"),
+	MEDIUM("medium"),
+	HARD("hard");
 	
-	@Override
-	public DifficultyDto mapToDto() {
-		return map(DifficultyDto.class);
-	}
-
+	@Getter
+	private String value;
+	
 }
