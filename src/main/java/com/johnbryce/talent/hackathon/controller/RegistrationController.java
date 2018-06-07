@@ -16,12 +16,15 @@ import com.johnbryce.talent.hackathon.models.User;
 @RequestMapping("/registrations")
 public class RegistrationController {
 
+	private final int USER_TYPE_USER_ID = 1;
+
 	@Autowired
 	UserFacade UserFacade;
 
 	@PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public UserDto createUser(@RequestBody CreateUserInputDto userDtoToCreate) {
-		User user = UserFacade.createUser(userDtoToCreate.mapToModel(), userDtoToCreate.getCredentials().getPassword());
+		User user = UserFacade.createUser(userDtoToCreate.mapToModel(), userDtoToCreate.getCredentials().getPassword(),
+				USER_TYPE_USER_ID);
 		return user.mapToDto();
 	}
 }
