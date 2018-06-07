@@ -30,6 +30,8 @@ public class User extends AbstractModel {
 	// @Lob
 	private byte[] password;
 
+	private int userType;
+
 	@Override
 	public UserDto mapToDto() {
 		UserDto dto = new UserDto();
