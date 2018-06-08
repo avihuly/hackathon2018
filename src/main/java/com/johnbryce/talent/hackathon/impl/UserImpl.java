@@ -21,12 +21,12 @@ public class UserImpl implements UserFacade {
 	}
 
 	@Override
-	public User getUser(long id) {
+	public User getUser(int id) {
 		return userRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public User createUser(User user, String noneHashedPassword, long userType) {
+	public User createUser(User user, String noneHashedPassword, int userType) {
 		try {
 			// generate salt and hashedPasswrd(with the salt)
 			byte[] salt = SecurityUtils.generateSalt();

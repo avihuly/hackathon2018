@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -38,7 +39,7 @@ public class Challenge extends AbstractModel {
 	private String value;
 	// @NotNull
 	// @OneToOne(fetch = FetchType.EAGER, mappedBy = "id
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private User createdBy;
 	@CreationTimestamp
 	private LocalDateTime creationDate;
@@ -48,8 +49,8 @@ public class Challenge extends AbstractModel {
 	private LocalDateTime dueDate;
 	// @NotNull
 	private ChallengeStatus status;
-	@OneToMany
-	private List<User> submissions;
+	@OneToMany(mappedBy="challenge", cascade=CascadeType.ALL)
+	private List<Submission> submitters;
 	@OneToMany
 	private List<Comment> comments;
 	// @NotNull
@@ -60,11 +61,11 @@ public class Challenge extends AbstractModel {
 	public ChallengeDto mapToDto() {
 		ChallengeDto map = map(ChallengeDto.class);
 		if (status != null)
-			map.setStatus(status.mapToDto());
+			map.setStatus(status);
 		if (createdBy != null)
 			map.setCreatedBy(createdBy.mapToDto());
-		if (submissions != null)
-			map.setSubmissions(submissions.stream().map(User::mapToDto).collect(Collectors.toList()));
+		if (submitters != null)
+			map.setSubmitters(submitters.stream().map(Submission::mapToDto).collect(Collectors.toList()));
 		if (comments != null)
 			map.setComments(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
 		map.setDifficulty(difficulty);

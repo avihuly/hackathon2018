@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,10 +35,10 @@ public class Submission extends AbstractModel {
 
 	private String description;
 
-	@OneToOne
+	@ManyToOne
 	private User submitter;
 
-	@OneToOne
+	@ManyToOne
 	private Challenge challenge;
 
 	@CreationTimestamp
@@ -46,8 +47,7 @@ public class Submission extends AbstractModel {
 	@UpdateTimestamp
 	private LocalDateTime updateDate;
 
-	// @OneToMany
-	@ElementCollection
+	@OneToMany
 	private List<Comment> comments;
 
 	private String submission;
@@ -57,7 +57,8 @@ public class Submission extends AbstractModel {
 
 		SubmissionDto map = map(SubmissionDto.class);
 		map.setSubmitter(submitter.mapToDto());
-		map.setComments(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
+		if(comments!=null)
+			map.setComments(comments.stream().map(Comment::mapToDto).collect(Collectors.toList()));
 
 		return map;
 	}

@@ -1,13 +1,11 @@
 package com.johnbryce.talent.hackathon.models;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.johnbryce.talent.hackathon.dto.UserDto;
@@ -33,7 +31,10 @@ public class User extends AbstractModel {
 	private String lastName;
 	private byte[] salt;
 	private byte[] password;
-	private Long userType;
+	private int userType;
+	
+//	@oneToMany()
+//	private List<Submission> sumissions; 
 
 //	@ManyToMany
 	// @ElementCollection
