@@ -7,7 +7,7 @@ import com.johnbryce.talent.hackathon.models.Submission;
 
 public interface SubmissionFacade {
 
-	public Submission getSubmission(Long id);
+	public Submission getSubmission(int id);
 
 	public List<Submission> getAllSubmissions();
 

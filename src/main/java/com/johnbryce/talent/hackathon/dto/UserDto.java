@@ -24,11 +24,11 @@ public class UserDto extends AbstractDto {
 	@NotNull
 	private String lastName;
 
-	private List<ChatDto> chats;
+//	private List<ChatDto> chats;
 	
 	public User mapToModel() {
 		User map = map(User.class);
-		map.setChats(chats.stream().map(ChatDto::mapToModel).collect(Collectors.toList()));
+//		map.setChats(chats.stream().map(ChatDto::mapToModel).collect(Collectors.toList()));
 		return map(User.class);
 	}
 }

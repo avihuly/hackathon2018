@@ -1,13 +1,11 @@
 package com.johnbryce.talent.hackathon.models;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.johnbryce.talent.hackathon.dto.UserDto;
@@ -26,25 +24,28 @@ public class User extends AbstractModel {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	@Column(unique = true)
 	private String email;
 	private String firstName;
 	private String lastName;
 	private byte[] salt;
 	private byte[] password;
-	private Long userType;
+	private int userType;
+	
+//	@oneToMany()
+//	private List<Submission> sumissions; 
 
-	@ManyToMany
+//	@ManyToMany
 	// @ElementCollection
-	private List<Chat> chats;
+//	private List<Chat> chats;
 
 	@Override
 	public UserDto mapToDto() {
 		UserDto map = map(UserDto.class);
-		if (chats != null) {
-			map.setChats(chats.stream().map(Chat::mapToDto).collect(Collectors.toList()));
-		}
+//		if (chats != null) {
+//			map.setChats(chats.stream().map(Chat::mapToDto).collect(Collectors.toList()));
+//		}
 		return map;
 	}
 

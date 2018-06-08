@@ -8,8 +8,9 @@ public interface UserFacade {
 
 	public List<User> getAllUsers();
 
-	public User getUser(long id);
+	public User getUser(int id);
 
-	public User createUser(User user, String noneHashedPassword, long userType);
+	public User createUser(User user, String noneHashedPassword, int userType);
+
 
 }

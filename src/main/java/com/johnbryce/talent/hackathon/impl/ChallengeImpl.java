@@ -25,7 +25,7 @@ public class ChallengeImpl implements ChallengeFacade {
 	private ChallengeRepository challengeRepo;
 	
 	@Override
-	public Challenge getChallenge(Long id) {
+	public Challenge getChallenge(int id) {
 		return challengeRepo.getOne(id);
 	}
 
@@ -43,7 +43,7 @@ public class ChallengeImpl implements ChallengeFacade {
 	@Transactional
 	public Challenge createChallnge(Challenge challenge) {
 		challenge.setCreatedBy(userFacade.getUser());
-		challenge.setStatus(ChallengeStatus.NEW.get());
+		challenge.setStatus(ChallengeStatus.NEW);
 		Challenge save = challengeRepo.save(challenge);
 		return save;
 	}
@@ -53,21 +53,21 @@ public class ChallengeImpl implements ChallengeFacade {
 	public Challenge updateChallenge(Challenge challenge) {
 		Challenge current = challengeRepo.findById(challenge.getId()).orElseThrow(() -> new DataNotFoundException());
 		
-		if(! ChallengeStatus.flowCheck.test(current.getStatus(), challenge.getStatus())) {
-			throw new StatusFlowException();
-		}
-		current = challengeRepo.save(current);
+//		if(! ChallengeStatus.flowCheck.test(current.getStatus(), challenge.getStatus())) {
+//			throw new StatusFlowException();
+//		}
+		current = challengeRepo.save(challenge);
 		return current;
 	}
 
 	@Override
 	@Transactional
-	public Challenge deleteChallenge(Long id) {
+	public Challenge deleteChallenge(int id) {
 		Challenge current = challengeRepo.getOne(id);
-		if(! ChallengeStatus.flowCheck.test(current.getStatus(), ChallengeStatus.DELETED.get())) {
-			throw new StatusFlowException();
-		}
-		current.setStatus(ChallengeStatus.DELETED.get());
+//		if(! ChallengeStatus.flowCheck.test(current.getStatus(), ChallengeStatus.DELETED.get())) {
+//			throw new StatusFlowException();
+//		}
+		current.setStatus(ChallengeStatus.DELETED);
 		return current;
 	}
 

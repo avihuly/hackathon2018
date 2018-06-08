@@ -23,7 +23,7 @@ public class Chat extends AbstractModel {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	
 	@ManyToMany
 	// @ElementCollection

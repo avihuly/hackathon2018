@@ -7,7 +7,7 @@ import com.johnbryce.talent.hackathon.models.Challenge;
 
 public interface ChallengeFacade {
 
-	public Challenge getChallenge(Long id);
+	public Challenge getChallenge(int id);
 	
 	public List<Challenge> getChallenges(ChallengeFilters filters);
 	
@@ -15,8 +15,9 @@ public interface ChallengeFacade {
 	
 	public Challenge updateChallenge(Challenge challenge);
 	
-	public Challenge deleteChallenge(Long id);
+	public Challenge deleteChallenge(int id);
 
 	public List<Challenge> getChallenges();
+
 	
 }

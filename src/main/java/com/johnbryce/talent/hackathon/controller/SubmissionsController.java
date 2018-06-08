@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class SubmissionsController {
 	private SubmissionFacade submissionFacade;
 
 	@GetMapping("/{id}")
-	public SubmissionDto getSubmission(@PathVariable Long id) {
+	public SubmissionDto getSubmission(@PathVariable Integer id) {
 		return submissionFacade.getSubmission(id).mapToDto();
 	}
 
@@ -33,7 +34,7 @@ public class SubmissionsController {
 	}
 
 	@PostMapping
-	public SubmissionDto createSubmission(CreateSubmissionInputDto submission) {
+	public SubmissionDto createSubmission(@RequestBody CreateSubmissionInputDto submission) {
 		return submissionFacade.createSubmission(submission.mapToModel()).mapToDto();
 	}
 
